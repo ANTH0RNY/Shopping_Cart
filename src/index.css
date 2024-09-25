@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components{
+  .nav-item{
+    @apply hover:underline hover:decoration-logo-green decoration-4  hover:underline-offset-8;
+  }
+}
+
 /* :root { */
 /*   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
 /*   line-height: 1.5; */
