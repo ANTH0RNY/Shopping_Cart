@@ -4,7 +4,7 @@ import img1 from "../assets/logo_6.png"
 export default function Navbar(){
     return(
         <>
-      <nav className="flex py-2 px-3 text-logo-blue text-lg items-center font-vite font-semibold hover:cursor-pointer bg-slate-100">
+      <nav className="flex py-2 px-3 text-logo-blue text-lg items-center font-vite font-semibold hover:cursor-pointer">
         <div className="">
           <img src={img1} alt="logo" className="h-[4rem]" />
         </div>
