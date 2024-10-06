@@ -1,17 +1,26 @@
 // import './App.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import HomePage from './pages/HomePage'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import { RecoilRoot } from "recoil";
+import ShoppingCart from "./pages/ShoppingCart";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />
+    element: <HomePage />,
   },
-
-])
+  {
+    path: "cart",
+    element: <ShoppingCart />,
+  },
+]);
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <RecoilRoot>
+      <RouterProvider router={router} />
+    </RecoilRoot>
+  );
 }
 
-export default App
+export default App;

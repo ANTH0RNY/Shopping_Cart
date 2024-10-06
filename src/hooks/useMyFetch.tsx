@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useLocalStorage from "./useLocalStorage";
+import myLocalStorage from "./useLocalStorage";
 
 export type FetchResults<T> = {
   data: T | null;
@@ -12,23 +12,20 @@ export type FetchResults<T> = {
 export default function useMyFetch<T>(
   input: RequestInfo | URL,
   init?: RequestInit,
-  refresh: boolean = false
+  refresh: boolean = false,
 ): FetchResults<T> {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-
   useEffect(() => {
-    const storageData = useLocalStorage<T>(input.toString())
+    const storageData = myLocalStorage<T>(input.toString());
     const controller = new AbortController();
     if (storageData && !refresh) {
-      setLoading(false)
-      setError(null)
-      setData(storageData)
-
+      setLoading(false);
+      setError(null);
+      setData(storageData);
     } else {
-
       fetchData(input, { signal: controller.signal, ...init });
     }
     return () => {
@@ -37,15 +34,15 @@ export default function useMyFetch<T>(
   }, [input]);
   const fetchData = (input: RequestInfo | URL, init?: RequestInit) => {
     setLoading(true);
-    setData(null)
-    setError(null)
+    setData(null);
+    setError(null);
     fetch(input, init)
       .then((res) => {
         if (!res.ok) throw new Error(`Request to ${input} failed`);
         return res.json();
       })
       .then((dt) => {
-        useLocalStorage<T>(input.toString(), dt)
+        myLocalStorage<T>(input.toString(), dt);
         setData(dt);
         setError(null);
       })
